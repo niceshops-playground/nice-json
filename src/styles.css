@@ -1,0 +1,424 @@
+:root {
+  /* niceshops orange palette */
+  --orange: #ec6608;
+  --orange-bright: #ff7a1a;
+  --orange-dim: #b94e05;
+  --ink: #1c1a17;
+  --ink-2: #262320;
+  --ink-3: #322e29;
+  --line: #423c34;
+  --text: #f4efe9;
+  --text-dim: #b6aaa0;
+  --good: #4caf50;
+  --bad: #e5484d;
+  --radius: 14px;
+  --radius-sm: 9px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  /* syntax colors */
+  --tok-key: #ffb066;
+  --tok-string: #9cc77f;
+  --tok-number: #6fb3ff;
+  --tok-bool: #d79bff;
+  --tok-null: #b6aaa0;
+  --tok-punct: #8a8079;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(236, 102, 8, 0.16), transparent 60%), var(--ink);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.45;
+}
+
+.muted {
+  color: var(--text-dim);
+}
+
+/* ------------------------------ layout -------------------------------- */
+
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(0.6rem, 2vw, 1.4rem);
+}
+
+.topbar {
+  padding: 1rem 0 0.6rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.brand-mark {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  color: var(--orange);
+  background: var(--ink-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.1rem 0.5rem;
+  font-size: 1.1rem;
+}
+.topbar h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+}
+.tagline {
+  margin: 0.3rem 0 0;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+
+/* ------------------------------ toolbar ------------------------------- */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.7rem 0;
+}
+.toolbar .sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--line);
+  margin: 0.1rem 0.2rem;
+}
+.toolbar .spacer,
+.statusbar .spacer {
+  flex: 1;
+}
+.field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+.field.checkbox {
+  cursor: pointer;
+  user-select: none;
+}
+.field select {
+  background: var(--ink);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
+}
+.field input[type="checkbox"] {
+  accent-color: var(--orange);
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ------------------------------ buttons ------------------------------- */
+
+.btn {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1.1rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.05s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+.btn-primary {
+  background: var(--orange);
+  color: #fff;
+}
+.btn-primary:not(:disabled):hover {
+  background: var(--orange-bright);
+}
+.btn-secondary {
+  background: var(--ink-3);
+  color: var(--text);
+  border-color: var(--line);
+}
+.btn-secondary:not(:disabled):hover {
+  border-color: var(--orange);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-dim);
+  border-color: transparent;
+}
+.btn-ghost:not(:disabled):hover {
+  color: var(--text);
+  background: var(--ink-3);
+}
+
+/* ------------------------------- panes -------------------------------- */
+
+.panes {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  padding-bottom: 0.6rem;
+}
+.pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.pane-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-3);
+  min-height: 44px;
+}
+.pane-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.pane-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.2rem;
+}
+
+.badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.badge-ok {
+  color: var(--good);
+  background: rgba(76, 175, 80, 0.14);
+}
+.badge-error {
+  color: #ff8a8d;
+  background: rgba(229, 72, 77, 0.16);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.2rem;
+}
+.tab {
+  appearance: none;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.tab:hover {
+  color: var(--text);
+}
+.tab.active {
+  color: var(--orange);
+  background: var(--ink);
+  border-color: var(--line);
+}
+
+/* ------------------------------ editor -------------------------------- */
+
+.editor {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  resize: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  padding: 0.8rem 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+.editor::placeholder {
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+.error-bar {
+  border-top: 1px solid var(--line);
+  background: rgba(229, 72, 77, 0.1);
+  color: #ff9a9c;
+  padding: 0.5rem 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ------------------------------ output -------------------------------- */
+
+.output {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.output-pre {
+  margin: 0;
+  padding: 0.8rem 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  white-space: pre;
+}
+.output-pre code {
+  font: inherit;
+}
+
+.tok-key {
+  color: var(--tok-key);
+}
+.tok-string {
+  color: var(--tok-string);
+}
+.tok-number {
+  color: var(--tok-number);
+}
+.tok-boolean {
+  color: var(--tok-bool);
+}
+.tok-null {
+  color: var(--tok-null);
+  font-style: italic;
+}
+.tok-punct {
+  color: var(--tok-punct);
+}
+
+.pane-notice {
+  padding: 1.2rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+.pane-notice-error {
+  color: #ff9a9c;
+}
+
+/* ------------------------------- tree --------------------------------- */
+
+.tree {
+  padding: 0.7rem 0.6rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.tree-row {
+  white-space: nowrap;
+}
+.tree-toggle {
+  /* rendered as a <button> for native keyboard support — reset its chrome */
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.tree-toggle:hover {
+  background: var(--ink-3);
+}
+.tree-toggle:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: -2px;
+}
+.tree-caret {
+  display: inline-block;
+  width: 1em;
+  color: var(--text-dim);
+  transition: transform 0.12s ease;
+}
+.tree-caret.open {
+  transform: rotate(90deg);
+}
+.tree-key {
+  color: var(--tok-key);
+}
+.tree-colon,
+.tree-comma,
+.tree-bracket {
+  color: var(--tok-punct);
+}
+.tree-summary {
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* ----------------------------- statusbar ------------------------------ */
+
+.statusbar {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 0.6rem 0.2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------- responsive ------------------------------ */
+
+@media (max-width: 760px) {
+  .panes {
+    grid-template-columns: 1fr;
+  }
+  .pane {
+    min-height: 45vh;
+  }
+}
