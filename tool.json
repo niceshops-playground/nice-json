@@ -1,0 +1,10 @@
+{
+  "name": "Nice JSON",
+  "description": "JSON formatieren, minifizieren und als Baum ansehen, alles lokal im Browser",
+  "url": "https://niceshops-playground.github.io/nice-json/",
+  "category": "Entwicklung",
+  "type": "web",
+  "icon": "folder-code",
+  "owner": "@dmetzner",
+  "tags": ["json", "dev"]
+}
